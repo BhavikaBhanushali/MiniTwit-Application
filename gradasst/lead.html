@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}
+  {% if request.endpoint == 'lead' %}
+    Top per page most-viewed users
+  {% elif request.endpoint == 'lead' %}
+    {{ profile_user.username }}'s Timeline
+  {% else %}
+  Top per page most-viewed users
+  {% endif %}
+{% endblock %}
+{% block body %}
+  <h2>{{ self.title() }}</h2>
+  <ul class="messages">
+  {% for user in all_userscores %}
+  {% if user.username is defined%}
+    <li><strong><a href="{{ url_for('user_timeline', username=user.username)
+    }}">{{ user['username'] }}</a></strong>
+      {{ user['score'] }}
+    </li>
+  {% else %}
+
+  {% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}
+  {% if request.endpoint == 'lead' %}
+Top per page most-followed users
+  {% elif request.endpoint == 'lead' %}
+    {{ profile_user.username }}'s Timeline
+  {% else %}
+  Top per page most-followed users
+  {% endif %}
+{% endblock %}
+{% block body %}
+  <h2>{{ self.title() }}</h2>
+  <ul class="messages">
+  {% for fuser in f_all_userscores %}
+  {% if fuser.whomUserName is defined and fuser.score>0 %}
+    <li><strong><a href="{{ url_for('user_timeline', username=fuser.username)
+    }}">{{ fuser['whomUserName'] }}</a></strong>
+      {{ fuser['score'] }}
+    </li>
+  {% else %}
+
+  {% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}
